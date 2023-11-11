@@ -1,5 +1,8 @@
 #include "shell.h"
 
+/**
+ * main - Main shell program
+ */
 
 int main(void)
 {

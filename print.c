@@ -5,7 +5,7 @@
  * @c: what to print
  * Return: 0
  */
-int _print(char c)
+int _print(char *c)
 {
 	return (write(1, &c, 1));
 }

@@ -3,13 +3,13 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <unostd.h>
+#include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 void display_prompt(void);
-void read_command(char *command, size_t size);
+void read_command(char *userInput, size_t bufferSize);
 void execute_command(const char *command);
-int _print(char c);
+int _print(char *c);
 
 #endif
