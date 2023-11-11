@@ -5,13 +5,14 @@ int main(void)
 {
         int a = 3;
         int b = 5;
+        pid_t ppid;
+
         int sum = a + b;
-        pid_t pid;
-
-        pid = getpid();
-
+	
         printf("sum is %d\n", sum);
-        printf("pid is %u\n", pid);
+
+	ppid = getppid();
+        printf("ppid is %u\n", ppid);
 
 
         return 0;
