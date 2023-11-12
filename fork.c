@@ -4,6 +4,7 @@
 int main(void)
 {
 	pid_t pid;
+
 	char **argv;
 	struct stat buf;
 
@@ -16,11 +17,15 @@ int main(void)
 	pid = fork();
 
 	if (pid == -1)
-        {
-		perror("fork unsuccessful\n");
-		return 1;
+	{
+		perror("Fork unsuccessful\n");
+		return (1);
 	}
 
+	if (pid == 0)
+	{
+		sleep(40);
+	}
 
-	return 0;
+	return (0);
 }
