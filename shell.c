@@ -12,7 +12,7 @@ int main(void)
 	{
 	display_prompt();
 	read_command(command, sizeof(command));
-	execute_command(command);
+	execute(command);
 	}
 	return (0);
 }

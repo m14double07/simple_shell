@@ -1,21 +1,26 @@
-#include <stdio.h>
-#include <unistd.h>
+#include "shell.h"
+
 
 int main(void)
 {
 	pid_t pid;
+	char **argv;
+	struct stat buf;
 
-	printf("Before fork I was tall\n");
+	if (!file_status(argv[0], buf))
+	{
+		perror("Error in file_status");
+		exit(EXIT_FAILURE);
+	}
 
 	pid = fork();
 
 	if (pid == -1)
         {
-		perror("unsuccessful\n");
+		perror("fork unsuccessful\n");
 		return 1;
 	}
 
-	printf("After fork i became short\n");
 
 	return 0;
 }

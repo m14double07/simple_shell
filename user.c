@@ -14,12 +14,16 @@
 void read_command(char *userInput, size_t bufferSize)
 {
 	ssize_t bytes;
+	bool for_pipe = false;
 
 	userInput = NULL;
 	bufferSize = 0;
 	
-	while (1)
+	while (1 && !for_pipe)
 	{
+	if (isatty(STDIN_FILENO) == 0)
+		for_pipe = true;
+
 	bytes = getline(&userInput, &bufferSize, stdin);
 
 	if (bytes == -1)
@@ -36,6 +40,12 @@ void read_command(char *userInput, size_t bufferSize)
 	{
 	printf("Exiting the shell. Goodbye!\n");
 	break;
+	}
+
+	if (strcmp(*userInput, "exit") == 0)
+	{
+		printf("Exiting the shell. Goodbye!\n");
+		break;
 	}
 
 	free(userInput);
