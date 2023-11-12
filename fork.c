@@ -4,18 +4,29 @@
 int main(void)
 {
 	pid_t pid;
+	pid_t ppid;
 
-	printf("Before fork I was tall\n");
+	/* Code written before fork was called */
 
+	/* Call fork */
 	pid = fork();
 
 	if (pid == -1)
-        {
-		perror("unsuccessful\n");
-		return 1;
+	{
+		perror("Fork unsuccessful\n");
+		return (1);
 	}
 
-	printf("After fork i became short\n");
+	if (pid == 0)
+	{
+		sleep(40);
+		printf("I am the child\n");
+	}
+	else
+	{
+		ppid = getpid();
+		printf("Parent PID is: %u\n", ppid);
+	}
 
-	return 0;
+	return (0);
 }
