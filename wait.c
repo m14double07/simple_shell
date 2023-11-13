@@ -31,4 +31,3 @@ int main(void)
                 sleep (30);
                 printf('Parent Process\n');
         }
-}
