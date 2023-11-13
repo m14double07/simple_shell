@@ -1,14 +1,19 @@
-#include <stdio.h>
-#include <unistd.h>
+#include "shell.h"
+
 
 int main(void)
 {
 	pid_t pid;
-	pid_t ppid;
 
-	/* Code written before fork was called */
+	char **argv;
+	struct stat buf;
 
-	/* Call fork */
+	if (!file_status(argv[0], buf))
+	{
+		perror("Error in file_status");
+		exit(EXIT_FAILURE);
+	}
+
 	pid = fork();
 
 	if (pid == -1)
@@ -20,12 +25,6 @@ int main(void)
 	if (pid == 0)
 	{
 		sleep(40);
-		printf("I am the child\n");
-	}
-	else
-	{
-		ppid = getpid();
-		printf("Parent PID is: %u\n", ppid);
 	}
 
 	return (0);

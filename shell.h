@@ -6,10 +6,12 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <sys/stat.h>
 
 void display_prompt(void);
 void read_command(char *userInput, size_t bufferSize);
-void execute_command(const char *command);
 int _print(char *c);
+int execute(int argc, char **argv, char **env);
+bool file_status(char *path, struct stat *bufstat);
 
 #endif
