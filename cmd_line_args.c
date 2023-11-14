@@ -1,55 +1,83 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 int main(void)
 {
-    char *cmd = NULL, *cmd_cpy = NULL, *token = NULL;
-    char *delim = " \n";
-    size_t n = 0;  // Use '=' instead of '+'
-    int argc = 0, i = 0;  // Initialize argc to 0
-    char **argv = NULL;
+	char *cmd = NULL, *cmd_cpy = NULL, *token = NULL;
+	char *delim = " \n";
+	size_t n = 0;
+	int argc = 0, i = 0;
+	char **argv = NULL;
 
-    printf("$ ");
-    if (getline(&cmd, &n, stdin) == -1)
-        return -1;
+	printf("$ ");
 
-    cmd_cpy = strdup(cmd);
+	if (getline(&cmd, &n, stdin) == -1)
+	{
+		perror("getline failed");
+		return (-1);
+	}
 
-    token = strtok(cmd_cpy, delim);  // Use cmd_cpy instead of NULL
+	/* Handle the case of empty input */
+	if (cmd[0] == '\n')
+	{
+		printf("No command entered.\n");
+		free(cmd);
+		return (0);
+	}
 
-    while (token)
-    {
-        argc++;
-        token = strtok(NULL, delim);
-    }
+	cmd_cpy = strdup(cmd);
 
-    printf("%d\n", argc);
+	if (cmd_cpy == NULL)
+	{
+		perror("strdup failed");
+		free(cmd);
+		return (-1);
+	}
 
-    argv = malloc(sizeof(char *) * (argc + 1));  // Allocate space for NULL pointer
+	token = strtok(cmd_cpy, delim);
 
-    token = strtok(cmd, delim);
+	while (token)
+	{
+		argc++;
+		token = strtok(NULL, delim);
+	}
 
-    i = 0;  // Reset i to 0
+	printf("%d\n", argc);
 
-    while (token)
-    {
-        argv[i] = token;
-        token = strtok(NULL, delim);
-        i++;
-    }
-    argv[i] = NULL;
+	argv = malloc(sizeof(char *) * (argc + 1));
 
-    i = 0;
+	if (argv == NULL)
+	{
+		perror("malloc failed");
+		free(cmd_cpy);
+		free(cmd);
+		return (-1);
+	}
 
-    while (argv[i])
-    {
-        printf("%s\n", argv[i]);
-        i++;
-    }
+	token = strtok(cmd, delim);
+	i = 0;
 
-    free(cmd);  // Add a semicolon at the end
+	while (token)
+	{
+		argv[i] = token;
+		token = strtok(NULL, delim);
+		i++;
+	}
+	argv[i] = NULL;
 
-    return 0;
+	i = 0;
+
+	while (argv[i])
+	{
+		printf("%s\n", argv[i]);
+		i++;
+	}
+
+	/* Free allocated memory */
+	free(cmd_cpy);
+	free(cmd);
+	free(argv);
+
+	return (0);
 }
