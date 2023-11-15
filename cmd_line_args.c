@@ -1,6 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include "shell.h"
+
+/**
+ * main - Reads the user input
+ * Return: 0
+ */
 
 int main(void)
 {
@@ -18,7 +21,7 @@ int main(void)
 		return (-1);
 	}
 
-	/* Handle the case of empty input */
+
 	if (cmd[0] == '\n')
 	{
 		printf("No command entered.\n");
@@ -74,7 +77,7 @@ int main(void)
 		i++;
 	}
 
-	/* Free allocated memory */
+
 	free(cmd_cpy);
 	free(cmd);
 	free(argv);
