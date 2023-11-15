@@ -8,12 +8,11 @@
 int main(void)
 {
 	char *cmd = NULL, *cmd_cpy = NULL, *token = NULL;
-	char *delim = " \n";
+	char *delim = " ";
 	size_t n = 0;
 	int argc = 0, i = 0;
 	char **argv = NULL;
 
-	printf("$ ");
 
 	if (getline(&cmd, &n, stdin) == -1)
 	{
@@ -24,7 +23,7 @@ int main(void)
 
 	if (cmd[0] == '\n')
 	{
-		printf("No command entered.\n");
+		_print("No command entered.\n");
 		free(cmd);
 		return (0);
 	}
@@ -46,7 +45,7 @@ int main(void)
 		token = strtok(NULL, delim);
 	}
 
-	printf("%d\n", argc);
+	_print("%d\n", argc);
 
 	argv = malloc(sizeof(char *) * (argc + 1));
 
@@ -73,7 +72,7 @@ int main(void)
 
 	while (argv[i])
 	{
-		printf("%s\n", argv[i]);
+		_print("%s\n", argv[i]);
 		i++;
 	}
 

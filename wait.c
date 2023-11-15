@@ -6,28 +6,16 @@
 
 int main(void)
 {
-        pid_t pid;
+	pid_t pid;
+	pid = fork();
 
-        /* child process is created */
-        pid = fork();
+	if (pid == -1)
+	{
+	perror("Unsuccessful\n");
+	return (1);
+	}
 
-        /* if fork fails */
-        if (pid == -1)
-        {
-                perror("Unsuccessful\n");
-                return i;
-        }
-
-        /* in child process */
-        if (pid == 0)
-        {
-                printf('child process\n');
-        }
-
-        /* in parent proces */
-        else
-        {
-                wait(NULL);
-                sleep (30);
-                printf('Parent Process\n');
-        }
+	else
+	wait(NULL);
+	sleep (30);
+}
